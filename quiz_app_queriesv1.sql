@@ -1,0 +1,53 @@
+-- Active: 1735111327105@@127.0.0.1@3306@quizappdesignv1
+-- Active: 1735125771185@@127.0.0.1@3306@quizappdesign
+CREATE TABLE Users (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    role ENUM('student', 'teacher') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE quizzes (
+    quiz_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    teacher_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (teacher_id) REFERENCES Users(id) ON DELETE CASCADE
+
+);
+
+CREATE TABLE questions (
+    question_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    question TEXT NOT NULL,
+    quiz_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (quiz_id) REFERENCES quizzes(quiz_id) ON DELETE CASCADE
+);
+
+CREATE TABLE options (
+    option_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    option_text TEXT NOT NULL,
+    question_id INT,
+    is_correct BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (question_id) REFERENCES questions(question_id) ON DELETE CASCADE
+);
+
+CREATE TABLE Student_answers (
+    attempt_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    student_id INT,
+    quiz_id INT,
+    question_id INT,
+    option_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (quiz_id) REFERENCES quizzes(quiz_id) ON DELETE CASCADE,
+    Foreign Key (question_id) REFERENCES questions(question_id) ON DELETE CASCADE,
+    FOREIGN KEY (option_id) REFERENCES options(option_id) ON DELETE CASCADE
+);
