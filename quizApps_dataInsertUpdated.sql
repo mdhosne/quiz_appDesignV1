@@ -69,20 +69,17 @@ VALUES
 
 INSERT INTO Student_answers (student_id, quiz_id, question_id, option_id)
 VALUES
--- Student 1 answers Question 1 in Quiz 1
-(1, 1, 1, 13), -- Student selects correct option for "What is 2 + 2?"
 
--- Student 1 answers Question 2 in Quiz 2
-(1, 2, 2, 14), -- Student selects correct option for "Name the process by which plants make their food."
+(1, 1, 1, 13), 
 
--- Student 2 answers Question 3 in Quiz 3
-(2, 3, 3, 15), -- Student selects correct option for "Who was the first president of the United States?"
 
--- Student 2 answers Question 4 in Quiz 4
-(2, 4, 4, 16), -- Student selects correct option for "What is the output of 2 * 3 in Python?"
+(1, 2, 2, 19),  
 
--- Student 1 answers Question 5 in Quiz 5
-(1, 5, 5, 17); -- Student selects correct option for "What is the capital of France?"
 
-SELECT * FROM Users;
-SELECT * FROM questions;
+(2, 3, 3, 24),  
+
+
+(2, 4, 4, 25), 
+
+(1, 5, 5, 29); 
+
